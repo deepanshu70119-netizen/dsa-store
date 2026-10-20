@@ -448,4 +448,24 @@ function searchProducts() {
 
 </body>
 </html>
-```
+```function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    alert("✅ Product added to cart!");
+}function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    openCart();
+}
