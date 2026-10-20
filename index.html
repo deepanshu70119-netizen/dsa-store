@@ -1653,6 +1653,84 @@ function scrollToProducts(){
     let payment = new Razorpay(options);
 
     payment.open();
+<button id="payBtn" type="button">Pay Online / UPI</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+async function payOnline() {
+  alert("पहले Razorpay अकाउंट और सुरक्षित backend सेटअप करना होगा।");
+}
+
+document.getElementById("payBtn").addEventListener("click", payOnline);
+</script>
+
+const express = require("express");
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
+
+const app = express();
+app.use(express.json());
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+// ऑर्डर बनाएँ
+app.post("/create-order", async (req, res) => {
+  try {
+    const amount = Number(req.body.amount);
+
+    // ग्राहक से मिली राशि पर सीधे भरोसा न करें।
+    // असली दुकान में कीमत सर्वर पर प्रोडक्ट ID से निकालें।
+    if (!Number.isInteger(amount) || amount < 100) {
+      return res.status(400).json({ error: "Invalid amount" });
+    }
+
+    const order = await razorpay.orders.create({
+      amount,
+      currency: "INR",
+      receipt: "order_" + Date.now()
+    });
+
+    res.json({
+      orderId: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      keyId: process.env.RAZORPAY_KEY_ID
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Order creation failed" });
+  }
+});
+
+// भुगतान की signature सत्यापित करें
+app.post("/verify-payment", (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id,
+          razorpay_signature } = req.body;
+
+  const expected = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(razorpay_order_id + "|" + razorpay_payment_id)
+    .digest("hex");
+
+  const a = Buffer.from(expected);
+  const b = Buffer.from(razorpay_signature || "");
+
+  if (a.length !== b.length ||
+      !crypto.timingSafeEqual(a, b)) {
+    return res.status(400).json({ paid: false });
+  }
+
+  // Production में यहाँ payment status को Razorpay API
+  // से भी जाँचें और order को database में अपडेट करें।
+  res.json({ signatureValid: true });
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Payment server started");
+});
+
 }
 
 
