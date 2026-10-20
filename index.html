@@ -1733,5 +1733,25 @@ app.listen(process.env.PORT || 3000, () => {
 
 }npm init -y
 npm install express cors razorpay dotenv
+        
+<!-- DSA Store: Pay Online Button -->
+<div style="text-align:center; margin:20px;">
+  <button
+    id="payBtn"
+    type="button"
+    style="background:#16803c;color:white;padding:12px 24px;
+    border:0;border-radius:8px;font-size:16px;cursor:pointer;">
+    Pay Online / UPI
+  </button>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.getElementById("payBtn").addEventListener("click", function () {
+  alert("DSA Store: अगला स्टेप Razorpay backend सेट करना है।");
+});
+</script>
+
 
 
