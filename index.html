@@ -1,228 +1,420 @@
-
-<!doctype html>
-<html lang="hi">
+```html
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DSA Store | Online Shopping</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f6f7fc;color:#172033}
-header{background:white;border-bottom:1px solid #e1e6f2;position:sticky;top:0}
-.nav{max-width:1180px;margin:auto;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-size:22px;font-weight:bold;color:#5b4be7}
-input,select,textarea{padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit}
-.search{flex:1;min-width:180px;background:#f7f8fd}
-button{padding:11px 14px;border:0;border-radius:10px;cursor:pointer;font-weight:bold}
-.primary{background:#5b4be7;color:white}
-.navbtn,.chip{background:white;border:1px solid #e1e6f2}
-.container{max-width:1180px;margin:auto;padding:22px 16px}
-.hero{background:linear-gradient(120deg,#201a59,#6454ed);color:white;padding:32px;border-radius:20px}
-.hero h1{font-size:clamp(27px,4vw,42px);margin:0 0 10px}
-.section-title{margin:25px 0 7px}
-.sub,.small,.tag{color:#64708b;font-size:14px}
-.categories,.filters{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 24px}
-.chip{border-radius:22px;padding:10px 15px}
-.chip.active{background:#172033;color:white}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.card,.panel{background:white;border:1px solid #e1e6f2;border-radius:16px;overflow:hidden}
-.pic{height:160px;background:#f0f1fb;display:grid;place-items:center;font-size:64px}
-.card-body{padding:14px;display:flex;flex-direction:column;gap:9px}
-.price{font-size:20px;font-weight:bold}
-.old{text-decoration:line-through;color:#8991a5;font-size:13px;margin-left:5px}
-.card button{margin-top:5px}
-.panel{padding:18px;margin-top:24px}
-.rowline{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #e1e6f2}
-.field{display:block;width:100%;margin:7px 0 12px}
-.hide{display:none}
-.notice{padding:12px;background:#fff5d9;color:#6b4a00;border-radius:10px;font-size:13px;line-height:1.5}
-footer{text-align:center;padding:25px;color:#64708b}
-@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pic{height:125px;font-size:48px}.container{padding:15px 10px}.hero{padding:23px}.nav{gap:8px}}
-@media(max-width:360px){.grid{grid-template-columns:1fr}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Product Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2878ff, #6c42ff);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .top-bar h2 {
+            font-size: 26px;
+        }
+
+        .cart {
+            background: #222;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .card h3 {
+            margin-top: 15px;
+            font-size: 19px;
+        }
+
+        .description {
+            color: #777;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        .price {
+            color: #198754;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .add-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: #2878ff;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #155dcc;
+        }
+
+        .message {
+            text-align: center;
+            padding: 30px;
+            display: none;
+            color: #777;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header><div class="nav">
-<div class="logo">🛍️ DSA Store</div>
-<input id="search" class="search" placeholder="Search products...">
-<button class="navbtn" id="ordersBtn">My Orders</button>
-<button class="primary" id="cartBtn">🛒 Cart <span id="cartCount">0</span></button>
-</div></header>
 
-<main class="container">
-<section class="hero">
-<h1>Find your next favourite thing.</h1>
-<p>Electronics, fashion, home essentials and more — all in one place.</p>
-</section>
+    <header>
+        <h1>🛍️ My Product Store</h1>
 
-<h2 class="section-title">Shop by category</h2>
-<p class="sub">Pick a category to explore</p>
-<div id="categories" class="categories"></div>
+        <div class="search-box">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search products..."
+                onkeyup="searchProducts()"
+            >
+        </div>
+    </header>
 
-<h2 class="section-title">Popular products</h2>
-<p class="sub">Discover products at DSA Store</p>
-<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
-<div id="filters" class="filters"></div>
-<select id="sort">
-<option value="featured">Featured</option>
-<option value="low">Price: low to high</option>
-<option value="high">Price: high to low</option>
-</select>
-</div>
-<div id="products" class="grid"></div>
+    <div class="container">
 
-<section id="cartPanel" class="panel hide">
-<h2>Your Cart</h2>
-<div id="cartItems"></div>
-<div class="rowline"><strong>Total</strong><strong id="cartTotal">₹0</strong></div>
-<h3>Checkout details</h3>
-<label>Full name<input id="custName" class="field" placeholder="Your name"></label>
-<label>Phone number<input id="custPhone" class="field" placeholder="10-digit phone number"></label>
-<label>Delivery address<textarea id="custAddress" class="field" rows="3" placeholder="House, street, city, PIN code"></textarea></label>
-<label>Payment method
-<select id="payment" class="field">
-<option value="COD">Cash on Delivery (COD)</option>
-<option value="ONLINE">Online payment (not connected)</option>
-</select></label>
-<div class="notice">Demo checkout only. Online payments are not active. Orders are saved only in this browser, not on a server.</div>
-<button class="primary" id="placeOrder" style="margin-top:14px">Place demo order</button>
-</section>
+        <div class="top-bar">
+            <h2>Our Products</h2>
 
-<section id="ordersPanel" class="panel hide">
-<h2>My Orders</h2><div id="ordersList"></div>
-</section>
+            <div class="cart">
+                🛒 Cart: <span id="cartCount">0</span>
+            </div>
+        </div>
 
-<section class="panel">
-<h2>Shopping made simple</h2>
-<p>🚚 Delivery options — Add your delivery policy before launching.</p>
-<p>🔒 Safer checkout — Real stores need a secure server and verified payment gateway.</p>
-<p>💬 Customer support — Add your real support contact details.</p>
-</section>
-</main>
-<footer>© <span id="year"></span> DSA Store · Demo storefront</footer>
+        <div class="grid" id="productGrid">
 
-<script>
-const products=[
-{id:1,name:"Wireless Headphones",cat:"Electronics",price:1499,old:1999,emoji:"🎧",desc:"Wireless audio"},
-{id:2,name:"Smart Watch",cat:"Electronics",price:1899,old:2499,emoji:"⌚",desc:"Smart everyday features"},
-{id:3,name:"Bluetooth Speaker",cat:"Electronics",price:999,old:1299,emoji:"🔊",desc:"Portable music"},
-{id:4,name:"Cotton T-Shirt",cat:"Fashion",price:499,old:699,emoji:"👕",desc:"Everyday wear"},
-{id:5,name:"Casual Sneakers",cat:"Fashion",price:1299,old:1699,emoji:"👟",desc:"Casual shoes"},
-{id:6,name:"Backpack",cat:"Fashion",price:899,old:1199,emoji:"🎒",desc:"Daily essentials"},
-{id:7,name:"Table Lamp",cat:"Home & Living",price:799,old:999,emoji:"💡",desc:"Warm room lighting"},
-{id:8,name:"Cushion Set",cat:"Home & Living",price:599,old:799,emoji:"🛋️",desc:"Cosy home decor"},
-{id:9,name:"Water Bottle",cat:"Home & Living",price:299,old:399,emoji:"🧴",desc:"Reusable bottle"},
-{id:10,name:"Classic Watch",cat:"Accessories",price:999,old:1399,emoji:"⌚",desc:"Simple everyday style"},
-{id:11,name:"Sunglasses",cat:"Accessories",price:399,old:599,emoji:"🕶️",desc:"Lightweight accessory"},
-{id:12,name:"Travel Wallet",cat:"Accessories",price:349,old:499,emoji:"👛",desc:"Travel essentials"}
-];
+            <!-- PRODUCT 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"
+                     alt="Smart Watch">
 
-const categories=["All products","Electronics","Fashion","Home & Living","Accessories"];
-const $=id=>document.getElementById(id);
-const money=n=>"₹"+Number(n).toLocaleString("en-IN");
-let active="All products";
-let cart=[];
-try{cart=JSON.parse(localStorage.getItem("dsaCart")||"[]")}catch(e){cart=[]}
+                <h3>Smart Watch</h3>
 
-function saveCart(){
-try{localStorage.setItem("dsaCart",JSON.stringify(cart))}catch(e){}
-$("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
-}
+                <p class="description">
+                    Stylish smart watch with modern features.
+                </p>
 
-function drawCategories(){
-$("categories").innerHTML=categories.slice(1).map(c=>
-`<button class="chip" data-cat="${c}">${c}</button>`).join("");
-$("filters").innerHTML=categories.map(c=>
-`<button class="chip ${active===c?"active":""}" data-filter="${c}">${c}</button>`).join("");
-document.querySelectorAll("[data-cat],[data-filter]").forEach(b=>{
-b.onclick=()=>{active=b.dataset.cat||b.dataset.filter;drawCategories();drawProducts()};
-});
-}
+                <div class="price">₹1,499</div>
+                <div class="old-price">₹1,999</div>
 
-function drawProducts(){
-let q=$("search").value.toLowerCase();
-let list=products.filter(p=>
-(active==="All products"||p.cat===active)&&
-(p.name+" "+p.cat+" "+p.desc).toLowerCase().includes(q));
-if($("sort").value==="low")list.sort((a,b)=>a.price-b.price);
-if($("sort").value==="high")list.sort((a,b)=>b.price-a.price);
-$("products").innerHTML=list.length?list.map(p=>`
-<article class="card">
-<div class="pic">${p.emoji}</div>
-<div class="card-body">
-<span class="tag">${p.cat}</span>
-<strong>${p.name}</strong>
-<span class="small">${p.desc}</span>
-<div><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span></div>
-<button class="primary" data-add="${p.id}">Add to Cart</button>
-</div></article>`).join(""):"<p>No products found.</p>";
-document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(Number(b.dataset.add)));
-}
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
 
-function addToCart(id){
-let item=cart.find(x=>x.id===id);
-if(item)item.qty++;else cart.push({id,qty:1});
-saveCart();drawCart();
-$("cartPanel").classList.remove("hide");
-$("ordersPanel").classList.add("hide");
-$("cartPanel").scrollIntoView({behavior:"smooth"});
-}
 
-function drawCart(){
-let items=cart.map(x=>({...products.find(p=>p.id===x.id),qty:x.qty})).filter(p=>p.id);
-$("cartItems").innerHTML=items.length?items.map(p=>`
-<div class="rowline">
-<div><strong>${p.name}</strong><div class="small">${money(p.price)} × ${p.qty}</div></div>
-<div><strong>${money(p.price*p.qty)}</strong> <button class="navbtn" data-remove="${p.id}">Remove</button></div>
-</div>`).join(""):"<p>Your cart is empty.</p>";
-$("cartTotal").textContent=money(items.reduce((s,p)=>s+p.price*p.qty,0));
-document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{
-cart=cart.filter(x=>x.id!==Number(b.dataset.remove));saveCart();drawCart();
-});
-}
+            <!-- PRODUCT 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"
+                     alt="Headphones">
 
-function getOrders(){
-try{return JSON.parse(localStorage.getItem("dsaOrders")||"[]")}catch(e){return []}
-}
-function drawOrders(){
-let orders=getOrders();
-$("ordersList").innerHTML=orders.length?orders.map(o=>`
-<div class="rowline"><div><strong>Order #${o.id}</strong>
-<div class="small">${o.date} · ${o.name} · ${o.payment}</div>
-<div class="small">${o.items.map(i=>i.name+" × "+i.qty).join(", ")}</div>
-</div><strong>${money(o.total)}</strong></div>`).join(""):"<p>No demo orders yet.</p>";
-}
+                <h3>Wireless Headphones</h3>
 
-$("search").addEventListener("input",drawProducts);
-$("sort").addEventListener("change",drawProducts);
-$("cartBtn").onclick=()=>{
-$("cartPanel").classList.toggle("hide");$("ordersPanel").classList.add("hide");
-drawCart();$("cartPanel").scrollIntoView({behavior:"smooth"});
-};
-$("ordersBtn").onclick=()=>{
-$("ordersPanel").classList.toggle("hide");$("cartPanel").classList.add("hide");
-drawOrders();$("ordersPanel").scrollIntoView({behavior:"smooth"});
-};
+                <p class="description">
+                    High quality wireless headphones.
+                </p>
 
-$("placeOrder").onclick=()=>{
-let items=cart.map(x=>({...products.find(p=>p.id===x.id),qty:x.qty})).filter(p=>p.id);
-if(!items.length)return alert("Please add a product to cart first.");
-let name=$("custName").value.trim();
-let phone=$("custPhone").value.trim();
-let address=$("custAddress").value.trim();
-if(!name||!phone||!address)return alert("Please fill name, phone and address.");
-if(!/^[0-9+\-\s]{10,15}$/.test(phone))return alert("Please enter a valid phone number.");
-let order={id:Date.now().toString().slice(-7),date:new Date().toLocaleString("en-IN"),name,phone,address,payment:$("payment").value,items,total:items.reduce((s,p)=>s+p.price*p.qty,0)};
-let orders=getOrders();orders.unshift(order);
-try{localStorage.setItem("dsaOrders",JSON.stringify(orders))}catch(e){}
-cart=[];saveCart();drawCart();
-alert("Demo order saved in this browser only. No real payment was taken.");
-$("ordersPanel").classList.remove("hide");drawOrders();$("cartPanel").classList.add("hide");
-};
+                <div class="price">₹999</div>
+                <div class="old-price">₹1,499</div>
 
-$("year").textContent=new Date().getFullYear();
-drawCategories();drawProducts();saveCart();drawCart();
-</script>
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"
+                     alt="Shoes">
+
+                <h3>Running Shoes</h3>
+
+                <p class="description">
+                    Comfortable shoes for daily running.
+                </p>
+
+                <div class="price">₹1,299</div>
+                <div class="old-price">₹1,799</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 4 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600"
+                     alt="Camera">
+
+                <h3>Digital Camera</h3>
+
+                <p class="description">
+                    Capture beautiful photos and memories.
+                </p>
+
+                <div class="price">₹8,999</div>
+                <div class="old-price">₹11,999</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 5 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
+                     alt="Keyboard">
+
+                <h3>Gaming Keyboard</h3>
+
+                <p class="description">
+                    RGB gaming keyboard for gamers.
+                </p>
+
+                <div class="price">₹1,799</div>
+                <div class="old-price">₹2,499</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 6 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600"
+                     alt="Coffee">
+
+                <h3>Coffee Maker</h3>
+
+                <p class="description">
+                    Make delicious coffee at home.
+                </p>
+
+                <div class="price">₹2,499</div>
+                <div class="old-price">₹3,499</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 7 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600"
+                     alt="Bag">
+
+                <h3>Leather Bag</h3>
+
+                <p class="description">
+                    Premium stylish bag for everyday use.
+                </p>
+
+                <div class="price">₹1,999</div>
+                <div class="old-price">₹2,999</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <!-- PRODUCT 8 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600"
+                     alt="Laptop">
+
+                <h3>Laptop</h3>
+
+                <p class="description">
+                    Powerful laptop for work and study.
+                </p>
+
+                <div class="price">₹49,999</div>
+                <div class="old-price">₹59,999</div>
+
+                <button class="add-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+
+        </div>
+
+        <div class="message" id="noProduct">
+            ❌ Product not found
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+
+            document.getElementById("cartCount").innerText = cartCount;
+
+            alert("✅ Product added to cart!");
+        }
+
+
+        function searchProducts() {
+
+            let searchText =
+                document.getElementById("search").value.toLowerCase();
+
+            let products =
+                document.querySelectorAll(".card");
+
+            let found = 0;
+
+            products.forEach(function(product) {
+
+                let productName =
+                    product.querySelector("h3").innerText.toLowerCase();
+
+                if (productName.includes(searchText)) {
+
+                    product.style.display = "block";
+                    found++;
+
+                } else {
+
+                    product.style.display = "none";
+
+                }
+
+            });
+
+
+            if (found === 0) {
+
+                document.getElementById("noProduct").style.display = "block";
+
+            } else {
+
+                document.getElementById("noProduct").style.display = "none";
+
+            }
+        }
+
+    </script>
+
 </body>
 </html>
+```
